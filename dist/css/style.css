@@ -1,0 +1,21 @@
+.container-fluid {
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+.bg-2 { 
+    background-color: #474e5d; /* Dark Blue */
+    color: #ffffff;
+}
+.form-control{
+	width: 200px;
+	margin: 0 auto;
+}
+
+.btn .btn-default .btn-lg{
+	margin: 0 auto;
+	background: red;
+}
+/*.conteudo{
+	 background-image: url("../img/unicornio.png");
+}*/
