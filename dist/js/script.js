@@ -1,3 +1,11 @@
+var http="http://star-api.herokuapp.com/api/v1/";
+var azul="min[colorb_v]=-1&max[colorb_v]=0";
+var vermelho="min[colorb_v]=0&max[colorb_v]=1";
+var fracas="min%5Babsmag%5D=0&max%5Babsmag%5D=10";
+var fortes="min%5Babsmag%5D=-10&max%5Babsmag%5D=-3";
+var cemAnos="max[distly]=100";		
+var quinhentosAnos = "max[distly]=500";
+
 $(document).ready(function(){
 	$("#selecionar").change(function(){
 		var i = $("#selecionar").val();
@@ -12,47 +20,50 @@ $(document).ready(function(){
 	$("#porNome").click(function(){
 		var i = $("#selecionar").val();
 		selectCategoria(i);
+		$("#cor").val("cor");
+		$("#brilho").val("brilho");
+		$("#distancia").val("distancia");
+		$(".conteudoTodos").hide();
+		$("#selecionar").change(function(){
+			var i = $("#selecionar").val();
+			selectCategoria(i);
+		});
 	});
 
 	$("#todos").click(function(){
 		$("#pesquisa").hide();
+		$("#pesquisa").val('');
 		$(".conteudoTodos").show();
 		$("#botaoPesquisa").show();
+	});
+
+	$('#botaoPesquisa').click(function(){
 		var i = $("#selecionar").val();
-		selectFilter(i);
+		var j = $("#pesquisa").val();
+		if (j !=""){
+			request(http+i+"/"+j);
+		}
+
+		if (j == ""){
+			console.log("olaaa");
+			var cor = $("#cor").val();
+			var distancia = $("#distancia").val();
+			var brilho = $("#brilho").val();
+			testeUrl(i, cor, distancia, brilho);
+		}
 	});
 });
 
-var http="http://star-api.herokuapp.com/api/v1/";
-var azul='min[colorb_v]=-1&max[colorb_v]=0';
-var vermelho='min[colorb_v]=0&max[colorb_v]=1';
-var fracas="min[absmag]=10&max[absmag]=-3";
-var fortes="min[appmag]=-2.5&max[appmag]=6.5";
-var cemAnos="max[distly]=100";	
-var quinhentosAnos = "max[distly]=500";
+
 
 function selectCategoria(i){
 	if (i != "selecionar"){
-		console.log(i);
 		$("#pesquisa").show();
 		$("#botaoPesquisa").show();
 	}
 }
 
-function selectFilter(i){
-	switch(i){
-		case "stars":
-			$("#botaoPesquisa").click(function(){
-				var cor = $("#cor").val();
-				var distancia = $("#distancia").val();
-				var brilho = $("#brilho").val();
-				requisi(i, cor, distancia, brilho);
-			});
-		break;
-	}
-}
-
-function requisi(i, cor, distancia, brilho){
+function testeUrl(i, cor, distancia, brilho){
 	switch(cor){
 		case "azul":
 			var corUrl = azul;
