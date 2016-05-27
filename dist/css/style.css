@@ -17,7 +17,23 @@
 	background: red;
 }
 
+#botaoPesquisa{
+	display: none;
+}
+
 #pesquisa{
+	display: none;
+}
+
+.radio{
+	display:none;
+}
+
+.radioEstrelas{
+	display: none;
+}
+
+.conteudoTodos{
 	display: none;
 }
 /*.conteudo{
