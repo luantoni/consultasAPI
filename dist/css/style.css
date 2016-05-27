@@ -16,6 +16,10 @@
 	margin: 0 auto;
 	background: red;
 }
+
+#pesquisa{
+	display: none;
+}
 /*.conteudo{
 	 background-image: url("../img/unicornio.png");
 }*/
