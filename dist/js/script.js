@@ -1,27 +1,12 @@
 var http="http://star-api.herokuapp.com/api/v1/";
-var azul="min[colorb_v]=-1&max[colorb_v]=0";
-var vermelho="min[colorb_v]=0&max[colorb_v]=1";
 var fracas="min%5Babsmag%5D=0&max%5Babsmag%5D=10";
 var fortes="min%5Babsmag%5D=-10&max%5Babsmag%5D=-3";
-var cemAnos="max[distly]=100";		
-var quinhentosAnos = "max[distly]=500";
-var distancia1 = "min[distance]=10&max[distance]=100";
-var distancia2 = "min[distance]=101&max[distance]=300";
-var distancia3 = "min[distance]=301&max[distance]=500";
-var distancia4 = "min[distance]=501&max[distance]=1000";
-var distancia5 = "min[distance]=1001";
 var diam1 = "min[diam]=-1&max[diam]=6";
 var diam2 = "min[diam]=6&max[diam]=11";
 var diam3 = "min[diam]=11&max[diam]=21";
 var diam4 = "min[diam]=21&max[diam]=101";
 var diam5 = "min[diam]=101";
-var distOp1 = "min[distly]=100&max[distly]=1000"
-var distOp2 = "min[distly]=1001&max[distly]=2000";
-var distOp3 = "min[distly]=2001&max[distly]=3000"
-var distOp4 = "min[distly]=3001&max[distly]=4000"
-var distOp5 = "min[distly]=4001&max[distly]=5000"
-var distOp6 = "min[distly]=5001&max[distly]=6000"
-var distOp7 = "min[distly]=60001"
+
 $(document).ready(function(){
 	$("#selecionar").change(function(){
 		var i = $("#selecionar").val();
@@ -86,7 +71,8 @@ $(document).ready(function(){
 });
 
 function testeUrlOp(i, diametro, distanciaOp){
-	switch(diametro){
+	data = testeValor(0, 0, 0, distanciaOp);
+	/*switch(diametro){
 		case "zeroAcinco":
 			var diamUrl = diam1;
 		break;
@@ -102,31 +88,15 @@ function testeUrlOp(i, diametro, distanciaOp){
 		case "maisCem":
 			var diamUrl = diam5;
 		break;
-	}
-	switch(distanciaOp){
-		case "menosAnos":
-			var distUrl = distOp1;
-		break;
-		case "milAnos":
-			var distUrl = distOp2;
-		break;
+	}*/
 
-		case "doisAnos":
-			var distUrl = distOp3;
-		break;
-		case "tresAnos":
-			var distUrl = distOp4;
-		break;
-		case "quatroAnos":
-			var distUrl = distOp5;
-		break;
-		case "cincoAnos":
-			var distUrl = distOp6;
-		break;
-		case "maisAnos":
-			var distUrl = distOp7;
-		break;
+	if (data.posicaoMinima == ""){
+		var distUrl = "min[distly]="+data.posicaoMaxima;
 	}
+	else if(data.posicaoMinima != ""){
+		var distUrl = "min[distly]="+data.posicaoMinima+"&max[distly]="+data.posicaoMaxima;
+	}
+
 	request(http+i+"?"+diamUrl+"&"+distUrl);
 }
 
@@ -135,6 +105,20 @@ function selectCategoria(i){
 		$("#pesquisa").show();
 		$("#botaoPesquisa").show();
 	}
+}
+
+function testeValor(distancia, cor, brilho, distanciaOp){
+	if (cor == ""){var parametro = distancia;}
+	else if (distancia == ""){var parametro = cor;}
+		var letraMaiscula = parametro.indexOf("A");
+		var posicaoTotal = parametro.length;
+		var posicaoMinima = parametro.substring(0,letraMaiscula);
+		var posicaoMaxima = parametro.substring(letraMaiscula+1,posicaoTotal);
+		var data = [
+			posicaoMinima,
+			posicaoMaxima
+		]
+	return data;
 }
 
 function testeUrlExoplanets(i, numplanets, distancia){
@@ -150,55 +134,26 @@ function testeUrlExoplanets(i, numplanets, distancia){
 		}
 		var numUrl = "min[numplanets]="+minimo+"&max[numplanets]="+maximo;
 	}
-	
-	switch(distancia){
-		case "dezAcem":
-			var distUrl = distancia1;
-		break;
-		case "cemAtrezentos":
-			var distUrl = distancia2;
-		break;
-		case "trezentosAquinhentos":
-			var distUrl = distancia3;
-		break;
-		case "quinhentosAmil":
-			var distUrl = distancia4;
-		break;
-		case "maisMil":
-			var distUrl = distancia5;
-		break;
+
+	data = testeValor(distancia, 0, 0, 0);
+	if (data.posicaoMinima == ""){
+		var distUrl = "min[distance]="+data.posicaoMaxima;
+	}
+	else if(data.posicaoMinima != ""){
+		var distUrl = "min[distance]="+data.posicaoMinima+"&max[distance]="+data.posicaoMaxima;
 	}
 	request(http+i+"?"+numUrl+"&"+distUrl);
 }
 
 function testeUrlEstrelas(i, cor, distancia, brilho){
-	switch(cor){
-		case "azul":
-			var corUrl = azul;
-		break;
+	data = testeValor(0, cor, 0, 0);
+	var corUrl = "min[colorb_v]="+data.posicaoMinima+"&max[colorb_v]="+data.posicaoMaxima;
+	
+	var anosUrl = "max[distly]="+distancia;
 
-		case "vermelho":
-			var corUrl = vermelho;
-		break;
-	}
-	switch(distancia){
-		case "cemAnos":
-			var anosUrl = cemAnos;
-		break;
+	if (brilho == "0A10"){brilhoUrl = fraca}
+	else if (brilho == "-10A-3"){brilhoUrl = forte}
 
-		case "quinhentosAnos":
-			var anosUrl = quinhentosAnos;
-		break;
-	}
-	switch(brilho){
-		case "fracas":
-			var brilhoUrl = fracas;
-		break;
-
-		case "fortes":
-			var brilhoUrl = fortes;
-		break;
-	}
 	request(http+i+"?"+brilhoUrl+"&"+anosUrl+"&"+corUrl);
 }
 
