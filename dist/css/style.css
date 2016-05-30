@@ -33,7 +33,14 @@
 	display: none;
 }
 
-.conteudoTodos{
+.exoplanetas{
+	display: none;
+}
+.estrelasTodos{
+	display: none;
+}
+
+.open_cluster{
 	display: none;
 }
 /*.conteudo{
