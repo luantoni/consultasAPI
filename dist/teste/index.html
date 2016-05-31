@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang='pt'>
+<head>
+	<meta charset='utf-8'>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="js/jquery-1.12.3.js"></script>
+	<script src="js/script.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="conteudo">
+	<div class="container-fluid bg-2 text-center">
+		<select id="selecionar" class="form-control">
+			<option value="selecionar">Selecione categoria</option>
+			<option value="stars">Estrelas</option>
+			<option value="exo_planets">Exoplanetas </option>
+			<option value="local_groups">Grupo de galáxias</option>
+			<option value="open_cluster">Open stars</option>
+		</select>
+		<br>
+		<form class="form-inline">
+			<input type="pesquisa" id="pesquisa" class="form-control" size="50" placeholder="Digite o nome">
+		</form>
+		<br>
+		<div class="conteudoTodos">
+			<div class="estrelasTodos">
+				<select id="cor" class="form-control">
+					<option value="cor">Selecione cor</option>
+					<option value="-1A0">Azul</option>
+					<option value="0A1">Vermelho</option>
+				</select>
+				<br>
+				<select id="distancia" class="form-control">
+					<option value="distancia">Selecione distância</option>
+					<option value="100">100 anos luz</option>
+					<option value="500">500 anos luz</option>
+				</select>
+				<br>
+				<select id="brilho" class="form-control">
+					<option value="brilho">Selecione o brilho natural</option>
+					<option value="0A10">Instrinsicamente fraca</option>
+					<option value="-10A-3">Instrinsicamente forte</option>
+				</select>
+			</div>
+			<div class="exoplanetas">
+				<select id="numplanetas" class="form-control">
+					<option value="numplanetas">Nº planetas</option>
+					<option value="1">1 planeta</option>
+					<option value="2">2 planetas</option>
+					<option value="3">3 planetas</option>
+					<option value="4">4 planetas</option>
+					<option value="5">5 planetas</option>
+					<option value="6">6 planetas</option>
+				</select>
+				<br>
+				<select id="distance" class="form-control">
+					<option value="distancia">Selecione distância (anos-luz)</option>
+					<option value="10A100">10 a 100</option>
+					<option value="101A300">101 a 300</option>
+					<option value="301A500">301 a 500</option>
+					<option value="501A1000">501 a mil</option>
+					<option value="A1001">>mil</option>
+				</select>
+			</div>
+			<div class="open_cluster" class="form-control">
+				<select id="diametroOp" class="form-control">
+					<option value="diametroOp">Selecione diâmetro</option>
+					<option value="umAcinco">0 a 5</option>
+					<option value="cincoAdez">6 a 10</option>
+					<option value="dezAvinte">11 a 20</option>
+					<option value="vinteAcem">21 a 100</option>
+					<option value="maisCem">>cem</option>
+				</select>
+				<br>
+				<select id="distanciaOp" class="form-control">
+					<option value="distanciaOp">Selecione distância</option>
+					<option value="100A1000"> menos 1000 anos luz</option>
+					<option value="1001A2000">1000 anos luz</option>
+					<option value="2001A3000">2000 anos luz</option>
+					<option value="3001A4000">3000 anos luz</option>
+					<option value="4001A5000">4000 anos luz</option>
+					<option value="5001A6000">5000 anos luz</option>
+					<option value="A60001">>5001 anos luz</option>
+				</select>
+			</div>
+		</div>
+		<form role="form">
+			<div class="radio">
+				<label>
+					<input id="todos" type="radio" name="Opcao">Ver todo
+				</label>
+				<label>
+					<input id="porNome" type="radio" name="Opcao"checked>Pesquisar Nome
+				</label>
+			</div>
+		</form>
+		<br>
+		<button type="button" id="botaoPesquisa" class="btn btn-default btn-lg">
+			<span class="glyphicon glyphicon-search"></span> Search
+		</button>
+	</div>
+</div>
+<div id="conteudo"></div>
+</body>

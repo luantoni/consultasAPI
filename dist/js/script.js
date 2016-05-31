@@ -1,25 +1,7 @@
 var http="http://star-api.herokuapp.com/api/v1/";
 var cabecalho={
- listaItens:'<table class="table table-striped table-bordered" border="1"><tr><th>Id</th><th>Nome</th><th>Cor</th></tr>'
-}
-function recebeConteudo(){
-	var conteudo;
-	var i = $("#selecionar").val();
-	
-	conteudo = [i];
-
-	return conteudo;
-}
-
-function limpaSelect(){
-	$("#cor").val("cor");
-	$("#brilho").val("brilho");
-	$("#distancia").val("distancia");
-	$("#numplanetas").val("numplanetas");
-	$("#distance").val("distancia");
-	$("#diametroOp").val("diametroOp");
-	$("#distanciaOp").val("distanciaOp");
-	$("#pesquisa").val('');
+ listaestrelas:'<table class="table table-striped table-bordered" border="1"><tr><th>Id</th><th>Nome</th><th>Cor</th></tr>',
+ listaexo: '<table class="table table-striped table-bordered" border="1"><tr><th>Id</th><th>Nome</th><th>Numplanets</th></tr>'
 }
 
 $(document).ready(function(){
@@ -48,9 +30,9 @@ $(document).ready(function(){
 	$("#todos").click(function(){
 		conteudo = recebeConteudo();
 		limpaSelect();
-		esconde(['#pesquisa']);
+		esconde(['#pesquisa','#conteudo']);
 		mostra(['#botaoPesquisa']);
-
+		
 		if (conteudo == "stars"){
 			mostra([".estrelasTodos",".conteudoTodos"]);
 			esconde([".exoplanetas",".open_cluster"]);
@@ -95,25 +77,15 @@ $(document).ready(function(){
 	});
 });
 
-function testeUrlOp(i, diametro, distanciaOp){
-	data = testeValor('','', '', distanciaOp, diametro);
+function recebeConteudo(){
+	var conteudo;
+	var i = $("#selecionar").val();
+	
+	conteudo = [i];
 
-	if (data[1].min == "") {
-		var diamUrl = "min[diam]="+data[1].max;
-	}
-
-	else if (data[1].min != ""){
-		var diamUrl = "min[diam]="+data[1].min+"&max[diam]="+data[1].max;
-	}
-
-	if (data[0].min == ""){
-		var distUrl = "min[distly]="+data[0].max;
-	}
-	else if(data[0].min!= ""){
-		var distUrl = "min[distly]="+data[0].min+"&max[distly]="+data[0].max;
-	}
-	request(http+i+"?"+diamUrl+"&"+distUrl);
+	return conteudo;
 }
+
 
 function selectCategoria(i){
 	if (i != "selecionar"){
@@ -150,6 +122,53 @@ function testeValor(distancia, cor, brilho, distanciaOp, diametro){
 	return data;
 }
 
+function testeUrlEstrelas(i, cor, distancia, brilho){
+	data = testeValor('', cor, brilho, '', '');
+	if (data[0].min == "" && data[0].max == "cor"){
+		corUrl = "undefined";
+	}
+
+	else if (data[0].min != "" && data[0].max != "cor") {
+		var corUrl = "min[colorb_v]="+data[0].min+"&max[colorb_v]="+data[0].max;
+	}
+
+	if (data[1].min == "" && data[1].max == "brilho"){
+		brilhoUrl = "undefined";
+	}
+	else if (data[1].min != "" && data[1].max != "brilho"){
+		var brilhoUrl = "min[absmag]="+data[1].min+"&max[absmag]="+data[1].max;
+	}
+
+	if (distancia == ""){
+		anosUrl = "undefined";
+	}
+	else if (distancia != ""){
+		var anosUrl = "max[distly]="+distancia;
+	}
+	
+	request(http+i+"?"+brilhoUrl+"&"+anosUrl+"&"+corUrl);
+}
+
+function testeUrlOp(i, diametro, distanciaOp){
+	data = testeValor('','', '', distanciaOp, diametro);
+
+	if (data[1].min == "") {
+		var diamUrl = "min[diam]="+data[1].max;
+	}
+
+	else if (data[1].min != ""){
+		var diamUrl = "min[diam]="+data[1].min+"&max[diam]="+data[1].max;
+	}
+
+	if (data[0].min == ""){
+		var distUrl = "min[distly]="+data[0].max;
+	}
+	else if(data[0].min!= ""){
+		var distUrl = "min[distly]="+data[0].min+"&max[distly]="+data[0].max;
+	}
+	request(http+i+"?"+diamUrl+"&"+distUrl);
+}
+
 function testeUrlExoplanets(i, numplanets, distancia){
 	if (numplanets != "exo_planets"){
 		var numPlanets = parseInt(numplanets);
@@ -174,27 +193,14 @@ function testeUrlExoplanets(i, numplanets, distancia){
 	request(http+i+"?"+numUrl+"&"+distUrl);
 }
 
-function testeUrlEstrelas(i, cor, distancia, brilho){
-	data = testeValor('', cor, brilho, '', '');
-	
-	/*if (data[0].min == "" && data[0].max == "cor"){
-		data[0].min = "undefined";
-		data[0].max = "undefined";
-	}*/
-	var corUrl = "min[colorb_v]="+data[0].min+"&max[colorb_v]="+data[0].max;
 
-	var anosUrl = "max[distly]="+distancia;
-
-	var brilhoUrl = "min[absmag]="+data[1].min+"&max[absmag]="+data[1].max;
-	request(http+i+"?"+brilhoUrl+"&"+anosUrl+"&"+corUrl);
-}
 
 function request(url){
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function (){
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
 			var myArr = JSON.parse(xmlhttp.responseText);
-			console.log(myArr);
+			tabela(myArr);
 		}
 	}
 	xmlhttp.open("GET", url, true);
@@ -203,15 +209,24 @@ function request(url){
 
 function tabela(myArr){
 	var result = "";
-	result+= cabecalho.listaItens; 
+	conteudo = recebeConteudo();
+	if (conteudo == "stars"){
+		result+= cabecalho.listaestrelas; 
 		result += '<tr><td>'+ myArr.id + '</td>';
 		result += '<td>'+ myArr.label + '</td>';
 		result += '<td>'+ myArr.colorb_v + '</td></tr>'
+	}
+	else if (conteudo == "exo_planets"){
+		result+= cabecalho.listaexo;
+		result += '<tr><td>'+ myArr.id + '</td>';
+		result += '<td>'+ myArr.label + '</td>';
+		result += '<td>'+ myArr.numplanets + '</td></tr>'
+	}
 	$("#conteudo").show();
+
 	document.getElementById("conteudo").innerHTML = result;		
-	console.log(conteudo);
-	console.log(result);
 }
+
 
 function esconde (array){
 	for (var x=0; x<array.length; x++){
@@ -223,4 +238,15 @@ function mostra (array){
 	for (var x=0; x<array.length; x++){
 		$(array[x]).show();
 	}
+}
+
+function limpaSelect(){
+	$("#cor").val("cor");
+	$("#brilho").val("brilho");
+	$("#distancia").val("distancia");
+	$("#numplanetas").val("numplanetas");
+	$("#distance").val("distancia");
+	$("#diametroOp").val("diametroOp");
+	$("#distanciaOp").val("distanciaOp");
+	$("#pesquisa").val('');
 }

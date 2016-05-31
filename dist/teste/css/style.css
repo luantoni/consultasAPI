@@ -1,19 +1,15 @@
 .container-fluid {
-    padding-top: 50px;
+    padding-top: 70px;
     padding-bottom: 70px;
-    height: 650px;
 }
 
-.bg-2{ 
-	background-image: url("../img/unicornio2.png");
-	background-repeat: no-repeat;
+.bg-2 { 
     background-color: #474e5d; /* Dark Blue */
     color: #ffffff;
 }
-
 .form-control{
 	width: 200px;
-	margin: 20px auto;
+	margin: 0 auto;
 }
 
 .btn .btn-default .btn-lg{
@@ -21,17 +17,31 @@
 	background: red;
 }
 
-#botaoPesquisa, #pesquisa{
+#botaoPesquisa{
 	display: none;
 }
 
-.radioEstrelas, .exoplanetas, .estrelasTodos, .open_cluster, .radio{
+#pesquisa{
 	display: none;
 }
 
-table{
-	color:black;
-	text-align: center;
+.radio{
+	display:none;
+}
+
+.radioEstrelas{
+	display: none;
+}
+
+.exoplanetas{
+	display: none;
+}
+.estrelasTodos{
+	display: none;
+}
+
+.open_cluster{
+	display: none;
 }
 /*.conteudo{
 	 background-image: url("../img/unicornio.png");
