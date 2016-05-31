@@ -17,30 +17,11 @@
 	background: red;
 }
 
-#botaoPesquisa{
+#botaoPesquisa, #pesquisa{
 	display: none;
 }
 
-#pesquisa{
-	display: none;
-}
-
-.radio{
-	display:none;
-}
-
-.radioEstrelas{
-	display: none;
-}
-
-.exoplanetas{
-	display: none;
-}
-.estrelasTodos{
-	display: none;
-}
-
-.open_cluster{
+.radioEstrelas, .exoplanetas, .estrelasTodos, .open_cluster, .radio{
 	display: none;
 }
 /*.conteudo{
