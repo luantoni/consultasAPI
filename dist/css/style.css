@@ -1,15 +1,19 @@
 .container-fluid {
-    padding-top: 70px;
+    padding-top: 50px;
     padding-bottom: 70px;
+    height: 650px;
 }
 
-.bg-2 { 
+.bg-2{ 
+	background-image: url("../img/unicornio2.png");
+	background-repeat: no-repeat;
     background-color: #474e5d; /* Dark Blue */
     color: #ffffff;
 }
+
 .form-control{
 	width: 200px;
-	margin: 0 auto;
+	margin: 20px auto;
 }
 
 .btn .btn-default .btn-lg{
@@ -23,6 +27,11 @@
 
 .radioEstrelas, .exoplanetas, .estrelasTodos, .open_cluster, .radio{
 	display: none;
+}
+
+table{
+	color:white;
+	text-align: center;
 }
 /*.conteudo{
 	 background-image: url("../img/unicornio.png");
