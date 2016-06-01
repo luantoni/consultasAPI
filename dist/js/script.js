@@ -12,7 +12,8 @@ $(document).ready(function(){
 		conteudo = recebeConteudo();
 		if (conteudo == "selecionar"){
 			$('.conteudo').css('backgroundImage','url(constelacao.jpg)');
-			esconde(['#pesquisa','.radio','#botaoPesquisa','.conteudoTodos']);
+			esconde(['#pesquisa','.radio','#botaoPesquisa','.conteudoTodos',"#conteudo"]);
+			limpaSelect();
 		}
 		else {
 			$("#pesquisa").val('');
@@ -88,6 +89,7 @@ function teste(){
 	else if (conteudo == "open_cluster") mostraOpen();
 	else if (conteudo == "exo_planets") mostraExo();
 }
+
 function porNome(){
 	conteudo = recebeConteudo();
 	var j = $("#pesquisa").val();
@@ -158,10 +160,10 @@ function testeUrlEstrelas(i, cor, distancia, brilho){
 		var brilhoUrl = "min[absmag]="+data[1].min+"&max[absmag]="+data[1].max;
 	}
 
-	if (distancia == ""){
+	if (distancia == "distancia"){
 		anosUrl = "undefined";
 	}
-	else if (distancia != ""){
+	else if (distancia != "distancia"){
 		var anosUrl = "max[distly]="+distancia;
 	}
 	
