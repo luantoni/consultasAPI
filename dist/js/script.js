@@ -31,7 +31,7 @@ $(document).ready(function(){
 	$("#porNome").click(function(){
 		conteudo = recebeConteudo();
 		limpaSelect();
-		esconde(['.conteudoTodos']);
+		esconde(['.conteudoTodos',"#conteudo"]);
 
 		$("#selecionar").change(function(){
 			conteudo = recebeConteudo();
@@ -190,7 +190,7 @@ function testeUrlOp(i, diametro, distanciaOp){
 
 function testeUrlExoplanets(i, numplanets, distancia){
 	var distUrl;
-	if (numplanets != "exo_planets"){
+	if (numplanets != "numplanetas"){
 		var numPlanets = parseInt(numplanets);
 		if (numplanets == 1){
 			var minimo = numPlanets-2;
@@ -203,9 +203,11 @@ function testeUrlExoplanets(i, numplanets, distancia){
 		var numUrl = "min[numplanets]="+minimo+"&max[numplanets]="+maximo;
 	}
 
+	else if (numplanets == "numplanetas"){
+		var numUrl = "undefined";
+	}
+
 	data = testeValor(distancia, '', '', '', '');
-		console.log(data[0].min);
-		console.log(data[0].max);
 	if (data[0].min == ""){
 		if (data[0].max == "1001")distUrl = "min[distance]="+data[0].max;
 		else if (data[0].max == "distancia") distUrl = "undefined"; 
