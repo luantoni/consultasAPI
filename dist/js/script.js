@@ -22,17 +22,9 @@ $(document).ready(function(){
 			if ($("#todos").is(':checked')){
 				teste();
 			}
-			if (conteudo == "stars"){
-				$('.conteudo').css('backgroundImage','url(estrelas.jpg)');
-			}
-			else if (conteudo == "exo_planets"){
-				$('.conteudo').css('backgroundImage','url(exoplanet.jpg)');
-				//mostraExo();
-			}
-			else if (conteudo == "open_cluster"){
-				$('.conteudo').css('backgroundImage','url(openstar.jpg)');
-				//mostraOpen();
-			}
+			if (conteudo == "stars") $('.conteudo').css('backgroundImage','url(estrelas.jpg)');
+			else if (conteudo == "exo_planets") $('.conteudo').css('backgroundImage','url(exoplanet.jpg)');
+			else if (conteudo == "open_cluster") $('.conteudo').css('backgroundImage','url(openstar.jpg)');
 		}
 	});
 
