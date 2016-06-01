@@ -10,13 +10,23 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<nav class="navbar navbar-default">
+	<div class="container fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">Star API</a>
+		</div>
+		<ul class="nav navbar-nav">
+			 <li><a href="http://hacktheuniverse.github.io/star-api/" target="_blank">Star API documentation</a></li>
+		</ul>
+	</div>
+</nav>
 <div class="conteudo">
 	<div class="container-fluid bg-2 text-center">
 		<select id="selecionar" class="form-control">
 			<option value="selecionar">Selecione categoria</option>
 			<option value="stars">Estrelas</option>
 			<option value="exo_planets">Exoplanetas </option>
-			<option value="local_groups">Grupo de galáxias</option>
+			<!--<option value="local_groups">Grupo de galáxias</option>-->
 			<option value="open_cluster">Open stars</option>
 		</select>
 		<br>
@@ -97,9 +107,10 @@
 			</div>
 		</form>
 		<br>
-		<button type="button" id="botaoPesquisa" class="btn btn-default btn-lg">
-			<span class="glyphicon glyphicon-search"></span> Search
+		<button type="button" id="botaoPesquisa" class="btn btn-default">
+			<span class="glyphicon glyphicon-search"></span> Pesquisar
 		</button>
+		<br><br>
 		<div id="conteudo"></div>
 	</div>
 </div>

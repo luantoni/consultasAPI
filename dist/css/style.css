@@ -1,14 +1,23 @@
 .container-fluid {
-    padding-top: 50px;
     padding-bottom: 70px;
-    height: 650px;
+    height: 670px;
+}
+table {
+	color: black;
+	text-align: center;
+	background-color: white;
 }
 
-.bg-2{ 
-	background-image: url("../img/unicornio2.png");
+table th {
+	text-align: center;
+	font-size: 120%; 
+}
+
+.conteudo{
+	margin: 0 auto;
 	background-repeat: no-repeat;
-    background-color: #474e5d; /* Dark Blue */
     color: #ffffff;
+    height: 1000px;
 }
 
 .form-control{
@@ -16,23 +25,23 @@
 	margin: 20px auto;
 }
 
-.btn .btn-default .btn-lg{
-	margin: 0 auto;
-	background: red;
-}
-
 #botaoPesquisa, #pesquisa{
 	display: none;
 }
 
+#conteudo{
+	margin: 0 auto;
+	width: 50%;
+}
+
+body{
+	background-image: url("../img/constelacao.jpg");
+	background-repeat: no-repeat;
+}
 .radioEstrelas, .exoplanetas, .estrelasTodos, .open_cluster, .radio{
 	display: none;
 }
 
-table{
-	color:black;
-	text-align: center;
-}
 /*.conteudo{
 	 background-image: url("../img/unicornio.png");
 }*/
